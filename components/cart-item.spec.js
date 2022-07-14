@@ -39,4 +39,29 @@ describe('card-item', () => {
 
     expect(screen.getByTestId('quantity').textContent).toBe('2');
   });
+
+  it('should decrease quantity by 1 when first button is clicked', async () => {
+    renderCartItem();
+
+    const [_, buttonIncrease, buttonDecrease] = screen.getAllByRole('button');
+    const quantity = screen.getByTestId('quantity');
+    await fireEvent.click(buttonIncrease);
+    expect(quantity.textContent).toBe('2');
+
+    await fireEvent.click(buttonDecrease);
+    expect(quantity.textContent).toBe('1');
+  });
+
+  it('should not decrease when quantity is 1', async () => {
+    renderCartItem();
+
+    const [_, _s, buttonDecrease] = screen.getAllByRole('button');
+    const quantity = screen.getByTestId('quantity');
+
+    await fireEvent.click(buttonDecrease);
+    await fireEvent.click(buttonDecrease);
+    await fireEvent.click(buttonDecrease);
+    await fireEvent.click(buttonDecrease);
+    expect(quantity.textContent).toBe('1');
+  });
 });

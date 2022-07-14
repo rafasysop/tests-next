@@ -7,6 +7,10 @@ export default function CartItem({ product }) {
   const { remove, add } = useCartStore(store => store.actions);
   const [quantity, setQuantity] = useState(1);
 
+  const handleRemove = () => remove(product);
+  const handleIncrease = () => setQuantity(quantity + 1);
+  const handleDecrease = () => setQuantity(quantity >= 2 ? quantity - 1 : 1);
+
   return (
     <div data-testid="card-item" className="flex justify-between mt-6">
       <div className="flex">
@@ -18,10 +22,10 @@ export default function CartItem({ product }) {
         />
         <div className="mx-3">
           <h3 className="text-sm text-gray-600">{product.title}</h3>
-          <button onClick={() => remove(product)}>remove</button>
+          <button onClick={handleRemove}>remove</button>
           <div className="flex items-center mt-2">
             <button
-              onClick={() => setQuantity(quantity + 1)}
+              onClick={handleIncrease}
               className="text-gray-500 focus:outline-none focus:text-gray-600"
             >
               <svg
@@ -41,7 +45,7 @@ export default function CartItem({ product }) {
             </span>
 
             <button
-              onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+              onClick={handleDecrease}
               className="text-gray-500 focus:outline-none focus:text-gray-600"
             >
               <svg
