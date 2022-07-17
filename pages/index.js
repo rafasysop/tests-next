@@ -1,10 +1,12 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ProductCard from '../components/product-card';
 import Search from '../components/search';
 
+import axios from 'axios';
+
 export default function Home() {
   const [products, setProducts] = useState([]);
+  // const [erro, setError] = useState(false);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {

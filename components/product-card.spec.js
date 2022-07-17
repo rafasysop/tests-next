@@ -8,14 +8,6 @@ const product = {
   price: '22.00',
 };
 
-// jest.mock('../store/cart', () => ({
-//   store: {
-//     actions: {
-//       add: jest.fn(),
-//     },
-//   },
-// }));
-
 const renderProductCard = () => render(<ProductCard product={product} />);
 
 describe('product-card', () => {
@@ -33,15 +25,5 @@ describe('product-card', () => {
     expect(screen.getByTestId('image')).toHaveStyle({
       backgroundImage: product.image,
     });
-  });
-
-  it.skip('should call addToCard whn button gets clicked', async () => {
-    renderProductCard();
-
-    const button = screen.getByRole('button');
-
-    await fireEvent.click(button);
-
-    expect(add).toHaveBeenCalledTimes(1);
   });
 });

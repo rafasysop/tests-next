@@ -14,7 +14,7 @@ describe('card-item', () => {
   it('should render CartItem', () => {
     renderCartItem();
 
-    expect(screen.getByTestId('card-item')).toBeInTheDocument();
+    expect(screen.getByTestId('cart-item')).toBeInTheDocument();
   });
 
   it('should get title, price and image', () => {

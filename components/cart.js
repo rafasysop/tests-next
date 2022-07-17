@@ -3,19 +3,30 @@ import { useCartStore } from '../store/cart';
 import product from '../miragejs/factories/product';
 
 export default function Cart() {
-  const { open, products } = useCartStore(store => store.state);
-  const { toggle, removeAll } = useCartStore(store => store.actions);
+  const [{ open, products }, { toggle, removeAll }] = useCartStore(store => [
+    store.state,
+    store.actions,
+  ]);
 
   return (
     <div
+      data-testid="cart"
       className={`${
         !open ? 'hidden' : ''
       } fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300`}
     >
       <div className="flex items-center justify-between">
         <h3 className="text-2xl font-medium text-gray-700">Your cart</h3>
-        {products.length > 0 ? <button onClick={() => removeAll()}>Clear cart</button> : null}
-        <button onClick={() => toggle()} className="text-gray-600 focus:outline-none">
+        {products.length > 0 ? (
+          <button data-testid="remove-all" onClick={() => removeAll()}>
+            Clear cart
+          </button>
+        ) : null}
+        <button
+          data-testid="close-button"
+          onClick={() => toggle()}
+          className="text-gray-600 focus:outline-none"
+        >
           <svg
             className="h-5 w-5"
             fill="none"
